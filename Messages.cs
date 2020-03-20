@@ -8,9 +8,7 @@ namespace HangmanK
 {
     public class Messages
     {
-        public static void CallStartMessages()
-        {
-            string[] messages =
+        private string[] messages =
             {
             @" __    __       ___      .__   __.   _______ .___  ___.      ___      .__   __.
 |  |  |  |     /   \     |  \ |  |  /  _____||   \/   |     /   \     |  \ |  |
@@ -34,8 +32,8 @@ namespace HangmanK
     \__/  \__/     |__| |__| \__| |__| \__| |_______|| _| `._____|"
         };
 
-            string[] counting =
-                {
+        private string[] counting =
+            {
             @" __ 
 /_ |
  | |
@@ -67,6 +65,8 @@ namespace HangmanK
 |____/"
         };
 
+        public void CallStartMessages()
+        {
             Console.BackgroundColor = ConsoleColor.DarkCyan;
             Console.Clear();
 
@@ -82,24 +82,26 @@ namespace HangmanK
             Console.ResetColor();
         }
 
-        public static void CallGameMessages()
+        public string CallGameMessages(string maskStartWord, string guessedCharacterList, int guessingTries)
         {
             Console.Clear();
-            Console.WriteLine("Guess the word: {0}", new string(maskStartWord));
-            Console.WriteLine("Guessed characters: {0}", guessedCharactersList);
+            Console.WriteLine("Guess the word: {0}", maskStartWord);
+            Console.WriteLine("Guessed characters: {0}", guessedCharacterList);
             Console.WriteLine("You have {0} tries left.", guessingTries);
             Console.WriteLine();
             Console.Write("Your next guess is: ");
+
+            return Console.ReadLine().ToString();
         }
 
-        public static void CallCharMessages()
+        public void CallCharMessages()
         {
             Console.WriteLine("You already guessed this letter, try another!");
             Console.WriteLine("Press enter to continue.");
             Console.ReadLine();
         }
 
-        public static void CallViolationMessages()
+        public void CallViolationMessages()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\nOnly ONE single character allowed!");
